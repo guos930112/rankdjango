@@ -18,16 +18,13 @@ from django.urls import path
 from django.views.static import serve
 from django.conf.urls import url
 from rankdjango.settings import MEDIA_ROOT
-from users.views import user_score_update, user_score_rank
 from users.views import UserScoreUpdate, UserScoreRank
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^media/(?P<path>.*)', serve, {'document_root': MEDIA_ROOT}),
-    # url(r'^user_score_update/$', user_score_update, name='user_score_update'),
-    # url(r'^user_score_rank/$', user_score_rank, name='user_score_rank'),
     url(r'^user_score_update/$', UserScoreUpdate.as_view(), name='user_score_update'),
-    url(r'^user_score_rank/$', UserScoreRank.as_view(), name='user_score_rank')
+    url(r'^user_score_rank/(\d+)/(\d+)/$', UserScoreRank.as_view(), name='user_score_rank')
 
 ]
