@@ -17,7 +17,8 @@ class UserScoreUpdate(View):
         # 表单 请求的话 第一需要把中间件的 csrf 注释 第二 获取数据方式 request.POST.get('uid', None)
         # uid = request.POST.get('uid', None)
         # post json格式传参 获取方法：request.body, 且需要 把 bytes类型 转为 str 再转为 dict
-        data_dict = json.loads(request.body.decode())
+        arg_str = request.body.decode()
+        data_dict = json.loads(arg_str)
         uid = data_dict.get('uid', None)
         score = data_dict.get('score', None)
         if not uid:
